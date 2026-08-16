@@ -34,4 +34,3 @@ collections:
       - name: external_link
         label: External Link (If APK > 100MB)
         type: string
-        
