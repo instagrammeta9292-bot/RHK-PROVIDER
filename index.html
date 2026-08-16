@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#0b0b0f">
+
+    <meta name="description"
+          content="RHK Provider - Download trusted Android apps and games.">
+
+    <title>RHK Provider</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        <span>R</span>HK Provider
+    </div>
+
+    <button class="menu-btn" onclick="toggleMenu()">
+        ☰
+    </button>
+
+</header>
+
+
+<nav id="mobileMenu">
+
+    <a href="#home">Home</a>
+    <a href="#latest">Latest</a>
+    <a href="#games">Games</a>
+    <a href="#tools">Tools</a>
+    <a href="#about">About</a>
+
+</nav>
+
+
+<main>
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="badge">
+            🚀 RHK PROVIDER
+        </span>
+
+        <h1>
+            Discover your next
+            <span>favorite app.</span>
+        </h1>
+
+        <p>
+            Download trusted Android apps and games
+            from RHK Provider.
+        </p>
+
+        <div class="search-box">
+
+            <span>🔎</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search apps or games..."
+                oninput="searchApps()"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="categories">
+
+    <button onclick="filterApps('all')">
+        All
+    </button>
+
+    <button onclick="filterApps('app')">
+        📱 Apps
+    </button>
+
+    <button onclick="filterApps('game')">
+        🎮 Games
+    </button>
+
+    <button onclick="filterApps('tool')">
+        🛠️ Tools
+    </button>
+
+</section>
+
+
+<section class="section" id="latest">
+
+    <div class="section-title">
+
+        <div>
+            <h2>Latest Apps</h2>
+            <p>Recently added applications</p>
+        </div>
+
+    </div>
+
+    <div id="appGrid" class="app-grid"></div>
+
+</section>
+
+
+<section class="about" id="about">
+
+    <h2>About RHK Provider</h2>
+
+    <p>
+        RHK Provider is an independent platform for
+        discovering and downloading Android applications
+        and games.
+    </p>
+
+    <p>
+        Apps are provided only when we have the right
+        to distribute them or when they are our own projects.
+    </p>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        RHK Provider
+    </div>
+
+    <p>
+        © 2026 RHK Provider
+    </p>
+
+    <p>
+        Download responsibly.
+    </p>
+
+</footer>
+
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
