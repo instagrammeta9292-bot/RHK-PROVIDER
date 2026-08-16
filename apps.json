@@ -1,20 +1,29 @@
 [
   {
-    "name": "NetMirror",
+    "name": "NetMirror (watch all premium movies)",
     "version": "1.0",
     "platform": "Android",
     "category": "video",
-    "description": "NetMirror Android application. Download the APK from the RHK PROVIDER release.",
+    "description": "NetMirror Android application.",
     "image": "netmirror.png",
-    "download": "https://github.com/instagrammeta9292-bot/RHK140907/releases/download/V1.0/NetMirror.apk"
+    "download": "YOUR_NETMIRROR_LINK"
   },
   {
-    "name": "Alight Motion",
+    "name": "Alight Motion premium (unlocked)",
     "version": "1.0",
     "platform": "Android",
     "category": "tools",
-    "description": "Powerful video and motion graphics editor for creating animations, visual effects, and professional-looking videos.",
+    "description": "Video and motion graphics editor for creating animations and visual effects.",
     "image": "alightmotion.png",
-    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V2.0/Alight.Motion.Premium.v5.0.273.1028425.-.androforever.com.apk"
+    "download": "YOUR_AUTHORIZED_ALIGHT_MOTION_LINK"
+  },
+  {
+    "name": "capcut pro (without vpn)",
+    "version": "1.0",
+    "platform": "Android",
+    "category": "tool",
+    "description": "use without vpn when error occurres make (clear cache or force stop)",
+    "image": "capcut.png",
+    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V3.0/CapCut.apk"
   }
 ]
