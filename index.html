@@ -1,1050 +1,681 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    >
-
-    <title>RHK PROVIDER - Android Apps</title>
-
-    <meta
-        name="description"
-        content="RHK PROVIDER - Download Android applications."
-    >
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: #0b0b0f;
-            color: #ffffff;
-            min-height: 100vh;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        /* ================= HEADER ================= */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            background: rgba(11, 11, 15, 0.94);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-
-            border-bottom: 1px solid #25252d;
-        }
-
-        .navbar {
-            width: 100%;
-            max-width: 1100px;
-            margin: auto;
-
-            padding: 18px 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 23px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: #7c5cff;
-        }
-
-        .nav-button {
-            border: 1px solid #33333d;
-            background: #111116;
-
-            padding: 10px 16px;
-
-            border-radius: 12px;
-
-            color: #dddddf;
-            font-size: 14px;
-
-            transition: 0.2s;
-        }
-
-        .nav-button:hover {
-            border-color: #7c5cff;
-            color: #ffffff;
-        }
-
-        /* ================= HERO ================= */
-
-        .hero {
-            max-width: 1100px;
-            margin: auto;
-
-            padding: 45px 20px 35px;
-
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-block;
-
-            padding: 8px 14px;
-
-            border-radius: 30px;
-
-            background: #171421;
-            border: 1px solid #30264b;
-
-            color: #a996ff;
-
-            font-size: 13px;
-
-            margin-bottom: 18px;
-        }
-
-        .hero h1 {
-            font-size: clamp(38px, 8vw, 70px);
-
-            line-height: 1;
-
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: #7c5cff;
-        }
-
-        .hero p {
-            max-width: 620px;
-
-            margin: auto;
-
-            color: #9999a3;
-
-            line-height: 1.7;
-
-            font-size: 16px;
-        }
-
-        /* ================= SEARCH ================= */
-
-        .search-box {
-            max-width: 620px;
-
-            margin: 28px auto 0;
-
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-
-            padding: 16px 20px;
-
-            background: #15151b;
-
-            border: 1px solid #30303a;
-
-            border-radius: 14px;
-
-            outline: none;
-
-            color: white;
-
-            font-size: 15px;
-
-            transition: 0.2s;
-        }
-
-        .search-box input::placeholder {
-            color: #66666f;
-        }
-
-        .search-box input:focus {
-            border-color: #7c5cff;
-            box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.08);
-        }
-
-        /* ================= MAIN ================= */
-
-        main {
-            width: 100%;
-            max-width: 1100px;
-
-            margin: auto;
-
-            padding: 10px 20px 40px;
-        }
-
-        .section-title {
-            display: flex;
-
-            justify-content: space-between;
-            align-items: center;
-
-            margin: 20px 0;
-        }
-
-        .section-title h2 {
-            font-size: 30px;
-        }
-
-        .section-title p {
-            color: #777780;
-            font-size: 14px;
-        }
-
-        /* ================= CATEGORIES ================= */
-
-        .categories {
-            display: flex;
-
-            gap: 10px;
-
-            overflow-x: auto;
-
-            padding-bottom: 12px;
-
-            scrollbar-width: none;
-        }
-
-        .categories::-webkit-scrollbar {
-            display: none;
-        }
-
-        .category {
-            white-space: nowrap;
-
-            padding: 11px 18px;
-
-            border-radius: 30px;
-
-            border: 1px solid #30303a;
-
-            background: #15151b;
-
-            color: #aaaab2;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .category:hover {
-            border-color: #7c5cff;
-            color: white;
-        }
-
-        .category.active {
-            background: #7c5cff;
-            border-color: #7c5cff;
-            color: white;
-        }
-
-        /* ================= APP GRID ================= */
-
-        .app-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(280px, 1fr));
-
-            gap: 18px;
-
-            margin-top: 20px;
-        }
-
-        /* ================= APP CARD ================= */
-
-        .app-card {
-            background: #15151b;
-
-            border: 1px solid #292932;
-
-            border-radius: 20px;
-
-            padding: 20px;
-
-            transition:
-                transform 0.25s,
-                border-color 0.25s,
-                box-shadow 0.25s;
-        }
-
-        .app-card:hover {
-            transform: translateY(-4px);
-
-            border-color: #51477a;
-
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.25);
-        }
-
-        /* ================= APP TOP ================= */
-
-        .app-top {
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-        }
-
-        .app-icon {
-            width: 68px;
-            height: 68px;
-
-            flex-shrink: 0;
-
-            border-radius: 17px;
-
-            background: #272731;
-
-            object-fit: cover;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-        }
-
-        .app-icon img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            display: block;
-        }
-
-        .default-icon {
-            font-size: 28px;
-        }
-
-        .app-name {
-            font-size: 20px;
-
-            font-weight: 700;
-
-            line-height: 1.3;
-        }
-
-        .app-version {
-            margin-top: 6px;
-
-            color: #888892;
-
-            font-size: 13px;
-        }
-
-        /* ================= DESCRIPTION ================= */
-
-        .app-description {
-            color: #9999a3;
-
-            line-height: 1.6;
-
-            margin: 18px 0;
-
-            font-size: 14px;
-
-            min-height: 45px;
-        }
-
-        /* ================= DOWNLOAD ================= */
-
-        .download-button {
-            display: block;
-
-            width: 100%;
-
-            text-align: center;
-
-            padding: 14px;
-
-            border-radius: 12px;
-
-            background: #7c5cff;
-
-            color: white;
-
-            font-weight: 700;
-
-            transition: 0.2s;
-        }
-
-        .download-button:hover {
-            background: #6949ee;
-
-            transform: translateY(-1px);
-        }
-
-        /* ================= LOADING ================= */
-
-        .loading {
-            text-align: center;
-
-            padding: 50px 10px;
-
-            color: #777780;
-        }
-
-        .loader {
-            width: 32px;
-            height: 32px;
-
-            margin: 0 auto 15px;
-
-            border: 3px solid #292932;
-
-            border-top-color: #7c5cff;
-
-            border-radius: 50%;
-
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* ================= NO RESULTS ================= */
-
-        .no-results {
-            display: none;
-
-            text-align: center;
-
-            padding: 60px 10px;
-
-            color: #777780;
-        }
-
-        .no-results-icon {
-            font-size: 40px;
-
-            margin-bottom: 10px;
-        }
-
-        .no-results h3 {
-            color: #aaaab2;
-
-            margin-bottom: 7px;
-        }
-
-        /* ================= ERROR ================= */
-
-        .error-message {
-            display: none;
-
-            text-align: center;
-
-            padding: 30px 15px;
-
-            color: #ff8585;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            margin-top: 70px;
-
-            border-top: 1px solid #24242d;
-
-            padding: 40px 20px;
-
-            text-align: center;
-
-            color: #777780;
-
-            font-size: 13px;
-        }
-
-        footer strong {
-            color: white;
-
-            font-size: 16px;
-        }
-
-        footer .copyright {
-            margin-top: 20px;
-        }
-
-        footer .notice {
-            max-width: 600px;
-
-            margin: 22px auto 0;
-
-            line-height: 1.6;
-        }
-
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 600px) {
-
-            .navbar {
-                padding: 15px;
-            }
-
-            .logo {
-                font-size: 21px;
-            }
-
-            .nav-button {
-                padding: 9px 13px;
-            }
-
-            .hero {
-                padding: 35px 16px 25px;
-            }
-
-            .hero h1 {
-                font-size: 42px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .search-box {
-                margin-top: 22px;
-            }
-
-            main {
-                padding: 5px 15px 30px;
-            }
-
-            .section-title h2 {
-                font-size: 28px;
-            }
-
-            .app-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .app-card {
-                padding: 18px;
-            }
-
-            .app-icon {
-                width: 64px;
-                height: 64px;
-            }
-
-            footer {
-                margin-top: 45px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RHK PROVIDER - Android Apps</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#0b0b0f;
+    color:#fff;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(11,11,15,.95);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #25252d;
+}
+
+.navbar{
+    max-width:1100px;
+    margin:auto;
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#7c5cff;
+}
+
+.nav-button{
+    border:1px solid #33333d;
+    padding:10px 16px;
+    border-radius:12px;
+    color:#ddd;
+}
+
+.hero{
+    max-width:1100px;
+    margin:auto;
+    padding:45px 20px 35px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:30px;
+    background:#171421;
+    border:1px solid #30264b;
+    color:#a996ff;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(40px,8vw,70px);
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#7c5cff;
+}
+
+.hero p{
+    max-width:620px;
+    margin:auto;
+    color:#9999a3;
+    line-height:1.7;
+    font-size:16px;
+}
+
+.search-box{
+    max-width:620px;
+    margin:28px auto 0;
+}
+
+.search-box input{
+    width:100%;
+    padding:17px 20px;
+    background:#15151b;
+    border:1px solid #30303a;
+    border-radius:14px;
+    outline:none;
+    color:white;
+    font-size:16px;
+}
+
+.search-box input:focus{
+    border-color:#7c5cff;
+}
+
+main{
+    max-width:1100px;
+    margin:auto;
+    padding:10px 20px 40px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:20px 0;
+}
+
+.section-title h2{
+    font-size:30px;
+}
+
+.section-title p{
+    color:#777780;
+}
+
+.categories{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:10px;
+}
+
+.category{
+    white-space:nowrap;
+    padding:11px 18px;
+    border-radius:30px;
+    border:1px solid #30303a;
+    background:#15151b;
+    color:#aaa;
+    cursor:pointer;
+}
+
+.category.active{
+    background:#7c5cff;
+    border-color:#7c5cff;
+    color:white;
+}
+
+.app-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+    margin-top:20px;
+}
+
+.app-card{
+    background:#15151b;
+    border:1px solid #292932;
+    border-radius:20px;
+    padding:20px;
+}
+
+.app-top{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.app-icon{
+    width:68px;
+    height:68px;
+    flex-shrink:0;
+    border-radius:17px;
+    background:#272731;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.app-icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.app-name{
+    font-size:20px;
+    font-weight:700;
+}
+
+.app-version{
+    margin-top:6px;
+    color:#888892;
+    font-size:13px;
+}
+
+.app-description{
+    color:#9999a3;
+    line-height:1.6;
+    margin:18px 0;
+    font-size:14px;
+}
+
+.download-button{
+    display:block;
+    width:100%;
+    text-align:center;
+    padding:14px;
+    border-radius:12px;
+    background:#7c5cff;
+    color:white;
+    font-weight:700;
+}
+
+.loading{
+    text-align:center;
+    padding:50px 10px;
+    color:#777780;
+}
+
+.error-message{
+    display:none;
+    text-align:center;
+    padding:30px 15px;
+    color:#ff8585;
+    line-height:1.7;
+}
+
+.no-results{
+    display:none;
+    text-align:center;
+    padding:50px 10px;
+    color:#777780;
+}
+
+footer{
+    margin-top:60px;
+    border-top:1px solid #24242d;
+    padding:40px 20px;
+    text-align:center;
+    color:#777780;
+}
+
+footer strong{
+    color:white;
+    font-size:16px;
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        padding:15px;
+    }
+
+    .hero{
+        padding:35px 16px 25px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    main{
+        padding:5px 15px 30px;
+    }
+
+    .app-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header>
+<div class="navbar">
 
-    <div class="navbar">
+<a href="#" class="logo">
+RHK <span>PROVIDER</span>
+</a>
 
-        <a href="#" class="logo">
-            RHK <span>PROVIDER</span>
-        </a>
+<a href="#apps" class="nav-button">
+Apps
+</a>
 
-        <a href="#apps" class="nav-button">
-            Apps
-        </a>
-
-    </div>
-
+</div>
 </header>
-
-
-<!-- ================= HERO ================= -->
 
 <section class="hero">
 
-    <div class="badge">
-        Android App Library
-    </div>
+<div class="badge">
+Android App Library
+</div>
 
-    <h1>
-        RHK <span>PROVIDER</span>
-    </h1>
+<h1>
+RHK <span>PROVIDER</span>
+</h1>
 
-    <p>
-        Discover Android applications in one simple place.
-        Search, explore and download available apps.
-    </p>
+<p>
+Discover Android applications in one simple place.
+Search, explore and download available apps.
+</p>
 
-    <div class="search-box">
+<div class="search-box">
 
-        <input
-            type="search"
-            id="searchInput"
-            placeholder="Search apps..."
-            autocomplete="off"
-        >
+<input
+type="search"
+id="searchInput"
+placeholder="Search apps..."
+autocomplete="off"
+>
 
-    </div>
+</div>
 
 </section>
 
-
-<!-- ================= MAIN ================= -->
-
 <main id="apps">
 
-    <div class="section-title">
+<div class="section-title">
 
-        <h2>
-            Apps
-        </h2>
+<h2>Apps</h2>
 
-        <p id="appCount">
-            Loading...
-        </p>
+<p id="appCount">Loading...</p>
 
-    </div>
+</div>
 
+<div class="categories">
 
-    <!-- CATEGORIES -->
+<button class="category active" data-category="all">
+All
+</button>
 
-    <div class="categories">
+<button class="category" data-category="tools">
+Tools
+</button>
 
-        <button
-            class="category active"
-            data-category="all"
-        >
-            All
-        </button>
+<button class="category" data-category="video">
+Video
+</button>
 
-        <button
-            class="category"
-            data-category="tools"
-        >
-            Tools
-        </button>
+<button class="category" data-category="other">
+Other
+</button>
 
-        <button
-            class="category"
-            data-category="video"
-        >
-            Video
-        </button>
+</div>
 
-        <button
-            class="category"
-            data-category="other"
-        >
-            Other
-        </button>
+<div class="loading" id="loading">
+Loading apps...
+</div>
 
-    </div>
+<div class="error-message" id="errorMessage">
+<b>Unable to load apps.</b>
+<br><br>
+The website could not read apps.json.
+<br><br>
+Check that apps.json is in the same GitHub Pages folder as index.html.
+</div>
 
+<div class="app-grid" id="appGrid"></div>
 
-    <!-- LOADING -->
-
-    <div
-        class="loading"
-        id="loading"
-    >
-
-        <div class="loader"></div>
-
-        Loading apps...
-
-    </div>
-
-
-    <!-- ERROR -->
-
-    <div
-        class="error-message"
-        id="errorMessage"
-    >
-
-        Unable to load apps.
-
-        <br><br>
-
-        Check that <b>apps.json</b> exists in the same folder as
-        <b>index.html</b>.
-
-    </div>
-
-
-    <!-- APP GRID -->
-
-    <div
-        class="app-grid"
-        id="appGrid"
-    ></div>
-
-
-    <!-- NO RESULTS -->
-
-    <div
-        class="no-results"
-        id="noResults"
-    >
-
-        <div class="no-results-icon">
-            🔍
-        </div>
-
-        <h3>
-            No apps found
-        </h3>
-
-        <p>
-            Try another search or category.
-        </p>
-
-    </div>
+<div class="no-results" id="noResults">
+No apps found.
+</div>
 
 </main>
 
-
-<!-- ================= FOOTER ================= -->
-
 <footer>
 
-    <strong>
-        RHK PROVIDER
-    </strong>
+<strong>RHK PROVIDER</strong>
 
-    <div class="copyright">
-        © 2026 RHK PROVIDER. All rights reserved.
-    </div>
+<br><br>
 
-    <div class="notice">
-        Only apps that you are authorized to distribute should be
-        uploaded to this website.
-    </div>
+© 2026 RHK PROVIDER. All rights reserved.
+
+<br><br>
+
+Only apps that you are authorized to distribute should be uploaded to this website.
 
 </footer>
 
-
-<!-- ================= JAVASCRIPT ================= -->
-
 <script>
 
-    const searchInput =
-        document.getElementById("searchInput");
+const searchInput =
+document.getElementById("searchInput");
 
-    const appGrid =
-        document.getElementById("appGrid");
+const appGrid =
+document.getElementById("appGrid");
 
-    const appCount =
-        document.getElementById("appCount");
+const appCount =
+document.getElementById("appCount");
 
-    const noResults =
-        document.getElementById("noResults");
+const loading =
+document.getElementById("loading");
 
-    const loading =
-        document.getElementById("loading");
+const errorMessage =
+document.getElementById("errorMessage");
 
-    const errorMessage =
-        document.getElementById("errorMessage");
+const noResults =
+document.getElementById("noResults");
 
-    const categories =
-        document.querySelectorAll(".category");
+const categories =
+document.querySelectorAll(".category");
 
+let apps = [];
 
-    let apps = [];
-
-    let selectedCategory = "all";
-
-
-    /* ================= LOAD APPS ================= */
-
-    async function loadApps() {
-
-        try {
-
-            const response =
-                await fetch("apps.json?cache=" + Date.now());
+let selectedCategory = "all";
 
 
-            if (!response.ok) {
+/* GET apps.json FROM SAME GITHUB PAGES LOCATION */
 
-                throw new Error(
-                    "apps.json could not be loaded"
-                );
+function getAppsUrl(){
 
+    return new URL(
+        "apps.json",
+        window.location.href
+    ).href;
+
+}
+
+
+/* LOAD APPS */
+
+async function loadApps(){
+
+    try{
+
+        const url = getAppsUrl();
+
+        console.log("Loading:",url);
+
+        const response = await fetch(
+            url + "?v=" + Date.now(),
+            {
+                cache:"no-store"
             }
+        );
 
+        if(!response.ok){
 
-            apps = await response.json();
-
-
-            if (!Array.isArray(apps)) {
-
-                throw new Error(
-                    "apps.json must contain an array"
-                );
-
-            }
-
-
-            loading.style.display = "none";
-
-            renderApps();
+            throw new Error(
+                "HTTP " + response.status
+            );
 
         }
 
-        catch (error) {
+        const text = await response.text();
 
-            console.error(error);
+        console.log("apps.json:",text);
 
-            loading.style.display = "none";
+        apps = JSON.parse(text);
 
-            errorMessage.style.display = "block";
+        if(!Array.isArray(apps)){
 
-            appCount.textContent = "0 apps";
+            throw new Error(
+                "apps.json must contain an array"
+            );
 
         }
+
+        loading.style.display="none";
+
+        renderApps();
+
+    }
+    catch(error){
+
+        console.error(
+            "APP LOAD ERROR:",
+            error
+        );
+
+        loading.style.display="none";
+
+        errorMessage.style.display="block";
+
+        appCount.textContent="0 apps";
 
     }
 
-
-    /* ================= CREATE APP CARD ================= */
-
-    function createAppCard(app) {
-
-        const card =
-            document.createElement("article");
-
-        card.className = "app-card";
+}
 
 
-        const icon =
-            app.image && app.image.trim() !== ""
+/* CREATE CARD */
 
-                ? `
-                    <img
-                        src="${escapeHTML(app.image)}"
-                        alt="${escapeHTML(app.name)} icon"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;default-icon&quot;>▶</div>';"
-                    >
-                  `
+function createCard(app){
 
-                : `
-                    <div class="default-icon">
-                        ▶
-                    </div>
-                  `;
+    const card =
+    document.createElement("article");
 
+    card.className="app-card";
 
-        card.innerHTML = `
+    let iconHTML="▶";
 
-            <div class="app-top">
+    if(app.image){
 
-                <div class="app-icon">
-                    ${icon}
+        iconHTML=`
+        <img
+            src="${escapeHTML(app.image)}"
+            alt="${escapeHTML(app.name)}"
+            onerror="this.style.display='none';"
+        >
+        `;
+
+    }
+
+    card.innerHTML=`
+
+        <div class="app-top">
+
+            <div class="app-icon">
+                ${iconHTML}
+            </div>
+
+            <div>
+
+                <div class="app-name">
+                    ${escapeHTML(app.name)}
                 </div>
 
-                <div>
-
-                    <div class="app-name">
-                        ${escapeHTML(app.name)}
-                    </div>
-
-                    <div class="app-version">
-                        Version ${escapeHTML(app.version)}
-                        •
-                        ${escapeHTML(app.platform || "Android")}
-                    </div>
-
+                <div class="app-version">
+                    Version ${escapeHTML(app.version)}
+                    •
+                    ${escapeHTML(app.platform || "Android")}
                 </div>
 
             </div>
 
+        </div>
 
-            <p class="app-description">
-                ${escapeHTML(app.description)}
-            </p>
+        <p class="app-description">
+            ${escapeHTML(app.description)}
+        </p>
 
+        <a
+            class="download-button"
+            href="${escapeHTML(app.download)}"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Download APK
+        </a>
 
-            <a
-                class="download-button"
-                href="${escapeHTML(app.download)}"
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-            >
-                Download APK
-            </a>
+    `;
 
-        `;
+    return card;
 
-
-        return card;
-
-    }
+}
 
 
-    /* ================= RENDER ================= */
+/* DISPLAY APPS */
 
-    function renderApps() {
+function renderApps(){
 
-        const search =
-            searchInput.value
-                .toLowerCase()
-                .trim();
+    const search =
+    searchInput.value
+    .toLowerCase()
+    .trim();
 
+    appGrid.innerHTML="";
 
-        appGrid.innerHTML = "";
+    const filtered =
+    apps.filter(app=>{
 
+        const name =
+        String(app.name || "")
+        .toLowerCase();
 
-        const filteredApps =
-            apps.filter(app => {
+        const description =
+        String(app.description || "")
+        .toLowerCase();
 
-                const name =
-                    String(app.name || "")
-                        .toLowerCase();
+        const category =
+        String(app.category || "other")
+        .toLowerCase();
 
-                const description =
-                    String(app.description || "")
-                        .toLowerCase();
+        const searchMatch =
+        name.includes(search) ||
+        description.includes(search);
 
-                const category =
-                    String(app.category || "other")
-                        .toLowerCase();
+        const categoryMatch =
+        selectedCategory==="all" ||
+        category===selectedCategory;
 
+        return searchMatch && categoryMatch;
 
-                const matchesSearch =
-                    name.includes(search) ||
-                    description.includes(search);
-
-
-                const matchesCategory =
-                    selectedCategory === "all" ||
-                    category === selectedCategory;
-
-
-                return (
-                    matchesSearch &&
-                    matchesCategory
-                );
-
-            });
+    });
 
 
-        filteredApps.forEach(app => {
+    filtered.forEach(app=>{
 
-            appGrid.appendChild(
-                createAppCard(app)
-            );
-
-        });
-
-
-        const count =
-            filteredApps.length;
-
-
-        appCount.textContent =
-            count +
-            (count === 1 ? " app" : " apps");
-
-
-        noResults.style.display =
-            count === 0
-                ? "block"
-                : "none";
-
-    }
-
-
-    /* ================= SEARCH ================= */
-
-    searchInput.addEventListener(
-        "input",
-        renderApps
-    );
-
-
-    /* ================= CATEGORY ================= */
-
-    categories.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                categories.forEach(item => {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                });
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                selectedCategory =
-                    button.dataset.category;
-
-
-                renderApps();
-
-            }
+        appGrid.appendChild(
+            createCard(app)
         );
 
     });
 
 
-    /* ================= SECURITY ================= */
-
-    function escapeHTML(value) {
-
-        return String(value ?? "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
+    appCount.textContent =
+    filtered.length +
+    (filtered.length===1 ? " app" : " apps");
 
 
-    /* ================= START ================= */
+    noResults.style.display =
+    filtered.length===0
+    ? "block"
+    : "none";
 
-    loadApps();
+}
+
+
+/* SEARCH */
+
+searchInput.addEventListener(
+"input",
+renderApps
+);
+
+
+/* CATEGORY */
+
+categories.forEach(button=>{
+
+    button.addEventListener(
+    "click",
+    ()=>{
+
+        categories.forEach(item=>{
+            item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        selectedCategory =
+        button.dataset.category;
+
+        renderApps();
+
+    });
+
+});
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* START */
+
+loadApps();
 
 </script>
 
