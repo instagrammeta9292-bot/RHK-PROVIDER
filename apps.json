@@ -26,4 +26,15 @@
     "image": "capcut.png",
     "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V3.0/CapCut.apk"
   }
+
+
+  {
+    "name": "Spotify (premium unlocked)",
+    "version": "1.0",
+    "platform": "Android",
+    "category": "video",
+    "description": "Spotify premium unlocked Android application.",
+    "image": "netmirror.png",
+    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V4.0/Spotify.Premium-v3.0.@EPICMODDER.apk"
+  } 
 ]
