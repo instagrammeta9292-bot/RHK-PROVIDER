@@ -144,6 +144,11 @@ main{
     gap:10px;
     overflow-x:auto;
     padding-bottom:10px;
+    scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
 }
 
 .category{
@@ -174,6 +179,12 @@ main{
     border:1px solid #292932;
     border-radius:20px;
     padding:20px;
+    transition:.2s;
+}
+
+.app-card:hover{
+    transform:translateY(-3px);
+    border-color:#51427e;
 }
 
 .app-top{
@@ -219,6 +230,25 @@ main{
     font-size:14px;
 }
 
+.app-meta{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.meta{
+    background:#20202a;
+    color:#aaa;
+    border-radius:8px;
+    padding:5px 9px;
+    font-size:11px;
+}
+
+.featured{
+    color:#b5a5ff;
+}
+
 .download-button{
     display:block;
     width:100%;
@@ -230,7 +260,12 @@ main{
     font-weight:700;
 }
 
-.loading{
+.download-button:hover{
+    background:#6d4ff0;
+}
+
+.loading,
+.no-results{
     text-align:center;
     padding:50px 10px;
     color:#777780;
@@ -246,9 +281,6 @@ main{
 
 .no-results{
     display:none;
-    text-align:center;
-    padding:50px 10px;
-    color:#777780;
 }
 
 footer{
@@ -270,6 +302,10 @@ footer strong{
         padding:15px;
     }
 
+    .logo{
+        font-size:19px;
+    }
+
     .hero{
         padding:35px 16px 25px;
     }
@@ -285,6 +321,10 @@ footer strong{
     .app-grid{
         grid-template-columns:1fr;
     }
+
+    .section-title h2{
+        font-size:25px;
+    }
 }
 </style>
 </head>
@@ -292,6 +332,7 @@ footer strong{
 <body>
 
 <header>
+
 <div class="navbar">
 
 <a href="#" class="logo">
@@ -303,7 +344,9 @@ Apps
 </a>
 
 </div>
+
 </header>
+
 
 <section class="hero">
 
@@ -333,6 +376,7 @@ autocomplete="off"
 
 </section>
 
+
 <main id="apps">
 
 <div class="section-title">
@@ -343,7 +387,8 @@ autocomplete="off"
 
 </div>
 
-<div class="categories">
+
+<div class="categories" id="categories">
 
 <button class="category active" data-category="all">
 All
@@ -357,31 +402,46 @@ Tools
 Video
 </button>
 
+<button class="category" data-category="music">
+Music
+</button>
+
 <button class="category" data-category="other">
 Other
 </button>
 
 </div>
 
+
 <div class="loading" id="loading">
 Loading apps...
 </div>
 
+
 <div class="error-message" id="errorMessage">
+
 <b>Unable to load apps.</b>
+
 <br><br>
-The website could not read apps.json.
+
+Make sure <b>apps.json</b> is in the same folder as index.html.
+
 <br><br>
-Check that apps.json is in the same GitHub Pages folder as index.html.
+
+Check GitHub Pages deployment and JSON syntax.
+
 </div>
 
+
 <div class="app-grid" id="appGrid"></div>
+
 
 <div class="no-results" id="noResults">
 No apps found.
 </div>
 
 </main>
+
 
 <footer>
 
@@ -393,9 +453,10 @@ No apps found.
 
 <br><br>
 
-Only apps that you are authorized to distribute should be uploaded to this website.
+Only apps that you are authorized to distribute should be uploaded.
 
 </footer>
+
 
 <script>
 
@@ -425,30 +486,16 @@ let apps = [];
 let selectedCategory = "all";
 
 
-/* GET apps.json FROM SAME GITHUB PAGES LOCATION */
-
-function getAppsUrl(){
-
-    return new URL(
-        "apps.json",
-        window.location.href
-    ).href;
-
-}
-
-
-/* LOAD APPS */
+/* =========================
+   LOAD apps.json
+========================= */
 
 async function loadApps(){
 
     try{
 
-        const url = getAppsUrl();
-
-        console.log("Loading:",url);
-
         const response = await fetch(
-            url + "?v=" + Date.now(),
+            "apps.json?v=" + Date.now(),
             {
                 cache:"no-store"
             }
@@ -462,67 +509,110 @@ async function loadApps(){
 
         }
 
-        const text = await response.text();
+        const data = await response.json();
 
-        console.log("apps.json:",text);
-
-        apps = JSON.parse(text);
-
-        if(!Array.isArray(apps)){
+        if(!Array.isArray(data)){
 
             throw new Error(
-                "apps.json must contain an array"
+                "apps.json must contain an array."
             );
 
         }
 
-        loading.style.display="none";
+        apps = data.filter(app => {
+
+            return app &&
+                   app.name &&
+                   app.download;
+
+        });
+
+        loading.style.display = "none";
 
         renderApps();
 
     }
     catch(error){
 
-        console.error(
-            "APP LOAD ERROR:",
-            error
-        );
+        console.error(error);
 
-        loading.style.display="none";
+        loading.style.display = "none";
 
-        errorMessage.style.display="block";
+        errorMessage.style.display = "block";
 
-        appCount.textContent="0 apps";
+        appCount.textContent = "0 apps";
 
     }
 
 }
 
 
-/* CREATE CARD */
+/* =========================
+   CREATE APP CARD
+========================= */
 
 function createCard(app){
 
     const card =
     document.createElement("article");
 
-    card.className="app-card";
+    card.className = "app-card";
 
-    let iconHTML="▶";
 
-    if(app.image){
+    const name =
+    escapeHTML(app.name || "Unknown App");
 
-        iconHTML=`
-        <img
-            src="${escapeHTML(app.image)}"
-            alt="${escapeHTML(app.name)}"
-            onerror="this.style.display='none';"
-        >
+    const version =
+    escapeHTML(app.version || "1.0");
+
+    const platform =
+    escapeHTML(app.platform || "Android");
+
+    const description =
+    escapeHTML(
+        app.description ||
+        "Android application."
+    );
+
+    const category =
+    escapeHTML(
+        app.category ||
+        "other"
+    );
+
+    const image =
+    escapeHTML(app.image || "");
+
+    const download =
+    escapeHTML(app.download);
+
+
+    let iconHTML = "▶";
+
+    if(image){
+
+        iconHTML = `
+            <img
+                src="${image}"
+                alt="${name}"
+                loading="lazy"
+                onerror="
+                    this.style.display='none';
+                    this.parentElement.innerText='▶';
+                "
+            >
         `;
 
     }
 
-    card.innerHTML=`
+
+    const featuredHTML =
+    app.featured === true
+    ? `<span class="meta featured">★ Featured</span>`
+    : "";
+
+
+    card.innerHTML = `
 
         <div class="app-top">
 
@@ -533,26 +623,39 @@ function createCard(app){
             <div>
 
                 <div class="app-name">
-                    ${escapeHTML(app.name)}
+                    ${name}
                 </div>
 
                 <div class="app-version">
-                    Version ${escapeHTML(app.version)}
+                    Version ${version}
                     •
-                    ${escapeHTML(app.platform || "Android")}
+                    ${platform}
                 </div>
 
             </div>
 
         </div>
 
+
+        <div class="app-meta">
+
+            <span class="meta">
+                ${category}
+            </span>
+
+            ${featuredHTML}
+
+        </div>
+
+
         <p class="app-description">
-            ${escapeHTML(app.description)}
+            ${description}
         </p>
+
 
         <a
             class="download-button"
-            href="${escapeHTML(app.download)}"
+            href="${download}"
             target="_blank"
             rel="noopener noreferrer"
         >
@@ -566,7 +669,9 @@ function createCard(app){
 }
 
 
-/* DISPLAY APPS */
+/* =========================
+   RENDER APPS
+========================= */
 
 function renderApps(){
 
@@ -575,10 +680,12 @@ function renderApps(){
     .toLowerCase()
     .trim();
 
-    appGrid.innerHTML="";
+
+    appGrid.innerHTML = "";
+
 
     const filtered =
-    apps.filter(app=>{
+    apps.filter(app => {
 
         const name =
         String(app.name || "")
@@ -592,20 +699,24 @@ function renderApps(){
         String(app.category || "other")
         .toLowerCase();
 
+
         const searchMatch =
         name.includes(search) ||
-        description.includes(search);
+        description.includes(search) ||
+        category.includes(search);
+
 
         const categoryMatch =
-        selectedCategory==="all" ||
-        category===selectedCategory;
+        selectedCategory === "all" ||
+        category === selectedCategory;
+
 
         return searchMatch && categoryMatch;
 
     });
 
 
-    filtered.forEach(app=>{
+    filtered.forEach(app => {
 
         appGrid.appendChild(
             createCard(app)
@@ -616,50 +727,70 @@ function renderApps(){
 
     appCount.textContent =
     filtered.length +
-    (filtered.length===1 ? " app" : " apps");
+    (
+        filtered.length === 1
+        ? " app"
+        : " apps"
+    );
 
 
     noResults.style.display =
-    filtered.length===0
+    filtered.length === 0
     ? "block"
     : "none";
 
 }
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 searchInput.addEventListener(
-"input",
-renderApps
+    "input",
+    renderApps
 );
 
 
-/* CATEGORY */
+/* =========================
+   CATEGORY BUTTONS
+========================= */
 
-categories.forEach(button=>{
+categories.forEach(button => {
 
     button.addEventListener(
-    "click",
-    ()=>{
+        "click",
+        () => {
 
-        categories.forEach(item=>{
-            item.classList.remove("active");
-        });
+            categories.forEach(item => {
 
-        button.classList.add("active");
+                item.classList.remove(
+                    "active"
+                );
 
-        selectedCategory =
-        button.dataset.category;
+            });
 
-        renderApps();
 
-    });
+            button.classList.add(
+                "active"
+            );
+
+
+            selectedCategory =
+            button.dataset.category;
+
+
+            renderApps();
+
+        }
+    );
 
 });
 
 
-/* ESCAPE HTML */
+/* =========================
+   SECURITY
+========================= */
 
 function escapeHTML(value){
 
@@ -673,7 +804,9 @@ function escapeHTML(value){
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 loadApps();
 
