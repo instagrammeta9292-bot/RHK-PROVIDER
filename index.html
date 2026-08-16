@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>RHK Provider - Android Apps</title>
+    <title>RHK Provider - NetMirror APK</title>
 
     <meta
         name="description"
-        content="RHK Provider - Discover Android apps and games."
+        content="RHK Provider - Discover and download Android applications."
     >
 
     <meta name="theme-color" content="#0b0b0f">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -26,15 +27,15 @@
 
         body {
             background: #0b0b0f;
-            color: #fff;
+            color: #ffffff;
             font-family: Arial, Helvetica, sans-serif;
             min-height: 100vh;
-            padding-bottom: 80px;
+            padding-bottom: 75px;
         }
 
         button,
         input {
-            font: inherit;
+            font-family: inherit;
         }
 
         button {
@@ -42,9 +43,10 @@
         }
 
         a {
-            text-decoration: none;
             color: inherit;
+            text-decoration: none;
         }
+
 
         /* HEADER */
 
@@ -52,15 +54,19 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(11, 11, 15, 0.95);
+
+            background: rgba(11,11,15,.96);
             backdrop-filter: blur(15px);
+
             border-bottom: 1px solid #25252d;
         }
 
         .header-inner {
             max-width: 1100px;
             margin: auto;
-            padding: 14px 16px;
+
+            min-height: 68px;
+            padding: 12px 16px;
 
             display: flex;
             align-items: center;
@@ -74,8 +80,8 @@
         }
 
         .logo {
-            width: 43px;
-            height: 43px;
+            width: 42px;
+            height: 42px;
 
             border-radius: 13px;
 
@@ -95,23 +101,23 @@
 
             box-shadow:
                 0 8px 25px
-                rgba(92, 58, 237, 0.3);
+                rgba(92,58,237,.3);
         }
 
-        .brand-text h1 {
-            font-size: 18px;
+        .brand-info h1 {
+            font-size: 17px;
             font-weight: 800;
         }
 
-        .brand-text p {
-            color: #858591;
-            font-size: 10px;
+        .brand-info p {
+            color: #777782;
+            font-size: 9px;
             margin-top: 3px;
         }
 
         .menu-btn {
-            width: 41px;
-            height: 41px;
+            width: 42px;
+            height: 42px;
 
             border-radius: 12px;
 
@@ -120,11 +126,7 @@
             background: #15151b;
             color: white;
 
-            font-size: 20px;
-        }
-
-        .menu-btn:active {
-            transform: scale(.95);
+            font-size: 19px;
         }
 
 
@@ -133,20 +135,22 @@
         .container {
             max-width: 1100px;
             margin: auto;
-            padding: 20px 16px;
+
+            padding: 22px 16px;
         }
 
 
         /* HERO */
 
         .hero {
-            padding: 18px 0 8px;
+            padding: 15px 0 5px;
         }
 
         .hero h2 {
             font-size: 30px;
             line-height: 1.15;
-            margin-bottom: 10px;
+
+            margin-bottom: 9px;
         }
 
         .hero h2 span {
@@ -164,9 +168,11 @@
         }
 
         .hero p {
-            color: #92929e;
-            font-size: 13px;
+            color: #858590;
+
+            font-size: 12px;
             line-height: 1.6;
+
             max-width: 600px;
         }
 
@@ -175,12 +181,15 @@
 
         .search-box {
             position: relative;
-            margin-top: 22px;
+
+            margin-top: 20px;
         }
 
         .search-box input {
             width: 100%;
             height: 53px;
+
+            padding: 0 48px;
 
             border-radius: 15px;
 
@@ -191,15 +200,11 @@
 
             outline: none;
 
-            padding:
-                0 48px
-                0 48px;
-
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .search-box input::placeholder {
-            color: #6e6e79;
+            color: #666671;
         }
 
         .search-box input:focus {
@@ -207,7 +212,7 @@
 
             box-shadow:
                 0 0 0 3px
-                rgba(112, 67, 230, 0.12);
+                rgba(112,67,230,.12);
         }
 
         .search-icon {
@@ -219,27 +224,29 @@
             transform:
                 translateY(-50%);
 
-            color: #8d8d98;
-            font-size: 20px;
+            color: #858590;
+
+            font-size: 18px;
         }
 
-        .clear-search {
+        .clear-btn {
+            display: none;
+
             position: absolute;
 
-            right: 13px;
+            right: 12px;
             top: 50%;
 
             transform:
                 translateY(-50%);
 
             border: none;
+
             background: transparent;
 
             color: #9999a4;
 
             font-size: 21px;
-
-            display: none;
         }
 
 
@@ -249,21 +256,22 @@
             margin-top: 30px;
         }
 
-        .section-title {
+        .section-heading {
             display: flex;
+
             align-items: center;
             justify-content: space-between;
 
             margin-bottom: 14px;
         }
 
-        .section-title h3 {
-            font-size: 19px;
+        .section-heading h3 {
+            font-size: 18px;
         }
 
-        .see-all {
+        .section-heading span {
             color: #9b70ff;
-            font-size: 12px;
+            font-size: 10px;
         }
 
 
@@ -275,9 +283,9 @@
 
             overflow-x: auto;
 
-            padding-bottom: 4px;
-
             scrollbar-width: none;
+
+            padding-bottom: 3px;
         }
 
         .categories::-webkit-scrollbar {
@@ -287,7 +295,7 @@
         .category {
             flex: 0 0 auto;
 
-            padding: 10px 15px;
+            padding: 10px 14px;
 
             border-radius: 11px;
 
@@ -295,9 +303,9 @@
 
             background: #15151b;
 
-            color: #bdbdc7;
+            color: #aaaab5;
 
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .category.active {
@@ -306,46 +314,55 @@
             color: white;
         }
 
-        .category:active {
-            transform: scale(.96);
-        }
-
 
         /* FEATURED */
-
-        .featured {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 13px;
-        }
 
         .featured-card {
             position: relative;
 
-            min-height: 190px;
+            overflow: hidden;
 
             padding: 20px;
 
-            overflow: hidden;
+            min-height: 215px;
 
             border-radius: 20px;
 
-            border: 1px solid #2a2a34;
+            border: 1px solid #302c3b;
 
             background:
                 radial-gradient(
-                    circle at 90% 10%,
-                    rgba(124, 58, 237, .45),
+                    circle at 90% 5%,
+                    rgba(124,58,237,.55),
                     transparent 35%
                 ),
                 linear-gradient(
                     135deg,
-                    #18131f,
+                    #191321,
                     #111117
                 );
         }
 
-        .featured-card .tag {
+        .featured-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -55px;
+            bottom: -65px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(59,130,246,.15);
+
+            filter: blur(10px);
+        }
+
+        .featured-badge {
             display: inline-block;
 
             padding: 6px 9px;
@@ -355,39 +372,86 @@
             background:
                 rgba(255,255,255,.08);
 
-            color: #cfc2ff;
+            color: #cdbbff;
 
             font-size: 9px;
 
-            margin-bottom: 18px;
+            margin-bottom: 17px;
         }
 
-        .featured-card h4 {
+        .featured-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-app {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .featured-icon {
+            width: 64px;
+            height: 64px;
+
+            flex: 0 0 64px;
+
+            border-radius: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #292933,
+                    #18181f
+                );
+
+            border: 1px solid #3b3b47;
+
+            font-size: 28px;
+        }
+
+        .featured-app h4 {
             font-size: 21px;
-            margin-bottom: 7px;
+            margin-bottom: 5px;
         }
 
-        .featured-card p {
-            color: #a0a0ab;
-            font-size: 12px;
-            line-height: 1.5;
-
-            max-width: 260px;
+        .featured-app p {
+            color: #9999a5;
+            font-size: 11px;
         }
 
-        .featured-card button {
+        .featured-description {
+            color: #9999a5;
+
+            font-size: 11px;
+            line-height: 1.6;
+
+            margin-top: 15px;
+
+            max-width: 500px;
+        }
+
+        .featured-btn {
+            position: relative;
+            z-index: 2;
+
             margin-top: 17px;
 
-            padding: 10px 15px;
+            padding: 11px 16px;
 
             border: none;
+
             border-radius: 10px;
 
             background: white;
             color: #111;
 
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
 
@@ -411,25 +475,29 @@
 
             border-radius: 16px;
 
-            background: #15151b;
-
             border: 1px solid #292933;
 
-            transition:
-                transform .2s,
-                border-color .2s;
+            background: #15151b;
+
+            transition: .2s;
         }
 
         .app-card:hover {
-            transform: translateY(-2px);
-            border-color: #444451;
+            border-color: #454552;
+
+            transform:
+                translateY(-2px);
         }
 
         .app-icon {
-            width: 57px;
-            height: 57px;
+            width: 58px;
+            height: 58px;
 
-            flex: 0 0 57px;
+            flex: 0 0 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             border-radius: 15px;
 
@@ -437,14 +505,10 @@
                 linear-gradient(
                     135deg,
                     #292933,
-                    #1d1d25
+                    #1c1c24
                 );
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 23px;
+            font-size: 25px;
         }
 
         .app-info {
@@ -463,24 +527,26 @@
         }
 
         .app-info p {
-            color: #858590;
+            color: #777782;
+
             font-size: 10px;
+
             margin-bottom: 6px;
         }
 
         .app-meta {
             display: flex;
-            gap: 7px;
+            gap: 6px;
 
-            color: #6f6f7a;
+            color: #64646f;
 
             font-size: 9px;
         }
 
         .view-btn {
-            flex: 0 0 auto;
-
             padding: 9px 12px;
+
+            flex: 0 0 auto;
 
             border-radius: 10px;
 
@@ -512,17 +578,18 @@
         }
 
         .no-results-icon {
-            font-size: 38px;
+            font-size: 35px;
             margin-bottom: 10px;
         }
 
         .no-results h4 {
             color: #ddd;
-            margin-bottom: 6px;
+
+            margin-bottom: 5px;
         }
 
         .no-results p {
-            font-size: 12px;
+            font-size: 11px;
         }
 
 
@@ -530,7 +597,8 @@
 
         footer {
             max-width: 1100px;
-            margin: 40px auto 15px;
+
+            margin: 35px auto 15px;
 
             padding: 0 16px;
 
@@ -579,6 +647,7 @@
 
         .nav-item {
             border: none;
+
             background: transparent;
 
             color: #777782;
@@ -620,11 +689,6 @@
                 font-size: 42px;
             }
 
-            .featured {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
             .app-grid {
                 grid-template-columns:
                     repeat(2, 1fr);
@@ -633,10 +697,10 @@
             .bottom-nav {
                 position: static;
 
+                max-width: 600px;
+
                 margin:
                     30px auto 0;
-
-                max-width: 600px;
 
                 border:
                     1px solid #292933;
@@ -675,7 +739,7 @@
                     R
                 </div>
 
-                <div class="brand-text">
+                <div class="brand-info">
 
                     <h1>
                         RHK Provider
@@ -693,7 +757,7 @@
             <button
                 class="menu-btn"
                 onclick="showMenu()"
-                aria-label="Open menu"
+                aria-label="Menu"
             >
                 ☰
             </button>
@@ -734,16 +798,16 @@
                 </span>
 
                 <input
-                    type="search"
                     id="searchInput"
+                    type="search"
                     placeholder="Search apps..."
                     autocomplete="off"
                     aria-label="Search apps"
                 >
 
                 <button
-                    class="clear-search"
-                    id="clearSearch"
+                    id="clearBtn"
+                    class="clear-btn"
                     onclick="clearSearch()"
                     aria-label="Clear search"
                 >
@@ -758,9 +822,12 @@
 
         <!-- CATEGORIES -->
 
-        <section class="section">
+        <section
+            class="section"
+            id="categoriesSection"
+        >
 
-            <div class="section-title">
+            <div class="section-heading">
 
                 <h3>
                     Categories
@@ -823,89 +890,85 @@
 
         <section class="section">
 
-            <div class="section-title">
+            <div class="section-heading">
 
                 <h3>
                     Featured
                 </h3>
 
-                <span class="see-all">
-                    Explore
+                <span>
+                    RHK Provider
                 </span>
 
             </div>
 
 
-            <div class="featured">
+            <article class="featured-card">
 
+                <div class="featured-content">
 
-                <article class="featured-card">
-
-                    <span class="tag">
-                        RHK FEATURED
+                    <span class="featured-badge">
+                        ⭐ FEATURED APP
                     </span>
 
-                    <h4>
-                        RHK Music
-                    </h4>
 
-                    <p>
-                        A simple music application
-                        created by RHK.
+                    <div class="featured-app">
+
+                        <div class="featured-icon">
+                            📺
+                        </div>
+
+                        <div>
+
+                            <h4>
+                                NetMirror
+                            </h4>
+
+                            <p>
+                                Android Application
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="featured-description">
+                        NetMirror is currently available
+                        on RHK Provider as an Android APK.
+                        Open the app page to view the
+                        available information and download
+                        the APK from its GitHub Release.
                     </p>
 
+
                     <button
-                        onclick="openApp('RHK Music')"
+                        class="featured-btn"
+                        onclick="openNetMirror()"
                     >
                         View App →
                     </button>
 
-                </article>
+                </div>
 
-
-
-                <article class="featured-card">
-
-                    <span class="tag">
-                        NEW
-                    </span>
-
-                    <h4>
-                        RHK Tools
-                    </h4>
-
-                    <p>
-                        Useful Android tools and
-                        utilities.
-                    </p>
-
-                    <button
-                        onclick="openApp('RHK Tools')"
-                    >
-                        View App →
-                    </button>
-
-                </article>
-
-
-            </div>
+            </article>
 
         </section>
 
 
 
-        <!-- LATEST APPS -->
+        <!-- LATEST -->
 
         <section class="section">
 
-            <div class="section-title">
+            <div class="section-heading">
 
                 <h3>
                     Latest Apps
                 </h3>
 
-                <span class="see-all">
-                    Latest
+                <span>
+                    1 App
                 </span>
 
             </div>
@@ -917,86 +980,33 @@
             >
 
 
-                <!-- RHK MUSIC -->
+                <!-- NETMIRROR -->
 
                 <article
                     class="app-card"
-                    data-name="RHK Music"
-                    data-category="music"
-                >
-
-                    <div class="app-icon">
-                        🎵
-                    </div>
-
-
-                    <div class="app-info">
-
-                        <h4>
-                            RHK Music
-                        </h4>
-
-                        <p>
-                            Music Player
-                        </p>
-
-                        <div class="app-meta">
-
-                            <span>
-                                v1.0
-                            </span>
-
-                            <span>
-                                •
-                            </span>
-
-                            <span>
-                                Android
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="view-btn"
-                        onclick="openApp('RHK Music')"
-                    >
-                        View
-                    </button>
-
-                </article>
-
-
-
-                <!-- RHK TOOLS -->
-
-                <article
-                    class="app-card"
-                    data-name="RHK Tools"
+                    data-name="NetMirror"
                     data-category="tools"
                 >
 
                     <div class="app-icon">
-                        🛠️
+                        📺
                     </div>
 
 
                     <div class="app-info">
 
                         <h4>
-                            RHK Tools
+                            NetMirror
                         </h4>
 
                         <p>
-                            Utility App
+                            Android Application
                         </p>
 
                         <div class="app-meta">
 
                             <span>
-                                v1.0
+                                V1.0
                             </span>
 
                             <span>
@@ -1004,7 +1014,7 @@
                             </span>
 
                             <span>
-                                Android
+                                APK
                             </span>
 
                         </div>
@@ -1014,7 +1024,7 @@
 
                     <button
                         class="view-btn"
-                        onclick="openApp('RHK Tools')"
+                        onclick="openNetMirror()"
                     >
                         View
                     </button>
@@ -1022,22 +1032,54 @@
                 </article>
 
 
-
-                <!-- STUDY HELPER -->
-
-                <article
-                    class="app-card"
-                    data-name="Study Helper"
-                    data-category="education"
-                >
-
-                    <div class="app-icon">
-                        📚
-                    </div>
+            </div>
 
 
-                    <div class="app-info">
+            <!-- NO RESULTS -->
 
-                        <h4>
-                            Study Helper
-                        </h4
+            <div
+                class="no-results"
+                id="noResults"
+            >
+
+                <div class="no-results-icon">
+                    🔍
+                </div>
+
+                <h4>
+                    No apps found
+                </h4>
+
+                <p>
+                    Try another search or category.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 RHK Provider
+        </p>
+
+        <p>
+            Android application discovery portal
+        </p>
+
+    </footer>
+
+
+
+    <!-- BOTTOM NAV -->
+
+    <nav class="bottom-nav">
+
+        <div
