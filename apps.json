@@ -7,11 +7,9 @@
     "description": "NetMirror Android application. Download the APK from the RHK PROVIDER release.",
     "image": "netmirror.png",
     "download": "https://github.com/instagrammeta9292-bot/RHK140907/releases/download/V1.0/NetMirror.apk"
-  }
-]
-[
+  },
   {
-    "name": "Alight Motion premium (unlocked)",
+    "name": "Alight Motion",
     "version": "1.0",
     "platform": "Android",
     "category": "tools",
