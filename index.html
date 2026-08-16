@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    >
 
     <title>RHK PROVIDER - Android Apps</title>
 
-    <meta name="description"
-          content="RHK PROVIDER - Download Android applications from our collection.">
+    <meta
+        name="description"
+        content="RHK PROVIDER - Download Android applications."
+    >
 
     <style>
         * {
@@ -17,9 +23,14 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: #0b0b0f;
-            color: white;
+            color: #ffffff;
+            min-height: 100vh;
         }
 
         a {
@@ -27,21 +38,32 @@
             color: inherit;
         }
 
-        /* HEADER */
+        button,
+        input {
+            font: inherit;
+        }
+
+        /* ================= HEADER ================= */
 
         header {
             position: sticky;
             top: 0;
-            z-index: 100;
-            background: rgba(11, 11, 15, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #24242d;
+            z-index: 1000;
+
+            background: rgba(11, 11, 15, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+
+            border-bottom: 1px solid #25252d;
         }
 
         .navbar {
+            width: 100%;
             max-width: 1100px;
             margin: auto;
+
             padding: 18px 20px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -59,35 +81,56 @@
 
         .nav-button {
             border: 1px solid #33333d;
-            padding: 9px 15px;
-            border-radius: 10px;
+            background: #111116;
+
+            padding: 10px 16px;
+
+            border-radius: 12px;
+
+            color: #dddddf;
             font-size: 14px;
-            color: #ddd;
+
+            transition: 0.2s;
         }
 
-        /* HERO */
+        .nav-button:hover {
+            border-color: #7c5cff;
+            color: #ffffff;
+        }
+
+        /* ================= HERO ================= */
 
         .hero {
             max-width: 1100px;
             margin: auto;
-            padding: 70px 20px 45px;
+
+            padding: 45px 20px 35px;
+
             text-align: center;
         }
 
         .badge {
             display: inline-block;
-            padding: 7px 13px;
+
+            padding: 8px 14px;
+
             border-radius: 30px;
+
             background: #171421;
             border: 1px solid #30264b;
+
             color: #a996ff;
+
             font-size: 13px;
+
             margin-bottom: 18px;
         }
 
         .hero h1 {
             font-size: clamp(38px, 8vw, 70px);
+
             line-height: 1;
+
             margin-bottom: 20px;
         }
 
@@ -96,180 +139,374 @@
         }
 
         .hero p {
-            max-width: 600px;
+            max-width: 620px;
+
             margin: auto;
-            color: #a5a5ae;
+
+            color: #9999a3;
+
             line-height: 1.7;
+
             font-size: 16px;
         }
 
-        /* SEARCH */
+        /* ================= SEARCH ================= */
 
         .search-box {
-            max-width: 600px;
-            margin: 35px auto 0;
+            max-width: 620px;
+
+            margin: 28px auto 0;
+
             position: relative;
         }
 
         .search-box input {
             width: 100%;
-            padding: 17px 20px;
+
+            padding: 16px 20px;
+
             background: #15151b;
+
             border: 1px solid #30303a;
+
             border-radius: 14px;
+
             outline: none;
+
             color: white;
+
             font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+        .search-box input::placeholder {
+            color: #66666f;
         }
 
         .search-box input:focus {
             border-color: #7c5cff;
+            box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.08);
         }
 
-        /* MAIN */
+        /* ================= MAIN ================= */
 
         main {
+            width: 100%;
             max-width: 1100px;
+
             margin: auto;
-            padding: 20px;
+
+            padding: 10px 20px 40px;
         }
 
         .section-title {
             display: flex;
+
             justify-content: space-between;
             align-items: center;
+
             margin: 20px 0;
         }
 
         .section-title h2 {
-            font-size: 25px;
+            font-size: 30px;
         }
 
         .section-title p {
             color: #777780;
-            font-size: 13px;
+            font-size: 14px;
         }
 
-        /* CATEGORIES */
+        /* ================= CATEGORIES ================= */
 
         .categories {
             display: flex;
+
             gap: 10px;
+
             overflow-x: auto;
-            padding-bottom: 10px;
+
+            padding-bottom: 12px;
+
+            scrollbar-width: none;
+        }
+
+        .categories::-webkit-scrollbar {
+            display: none;
         }
 
         .category {
             white-space: nowrap;
-            padding: 10px 16px;
+
+            padding: 11px 18px;
+
             border-radius: 30px;
+
             border: 1px solid #30303a;
+
             background: #15151b;
-            color: #aaa;
+
+            color: #aaaab2;
+
             cursor: pointer;
+
+            transition: 0.2s;
         }
 
-        .category.active,
         .category:hover {
+            border-color: #7c5cff;
+            color: white;
+        }
+
+        .category.active {
             background: #7c5cff;
             border-color: #7c5cff;
             color: white;
         }
 
-        /* APP GRID */
+        /* ================= APP GRID ================= */
 
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
             gap: 18px;
+
+            margin-top: 20px;
         }
+
+        /* ================= APP CARD ================= */
 
         .app-card {
             background: #15151b;
+
             border: 1px solid #292932;
-            border-radius: 18px;
+
+            border-radius: 20px;
+
             padding: 20px;
-            transition: 0.25s;
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s,
+                box-shadow 0.25s;
         }
 
         .app-card:hover {
             transform: translateY(-4px);
+
             border-color: #51477a;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
         }
+
+        /* ================= APP TOP ================= */
 
         .app-top {
             display: flex;
+
             align-items: center;
-            gap: 14px;
+
+            gap: 15px;
         }
 
         .app-icon {
-            width: 62px;
-            height: 62px;
-            border-radius: 16px;
-            object-fit: cover;
+            width: 68px;
+            height: 68px;
+
+            flex-shrink: 0;
+
+            border-radius: 17px;
+
             background: #272731;
+
+            object-fit: cover;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .default-icon {
+            font-size: 28px;
         }
 
         .app-name {
-            font-size: 19px;
+            font-size: 20px;
+
             font-weight: 700;
+
+            line-height: 1.3;
         }
 
         .app-version {
             margin-top: 6px;
+
             color: #888892;
+
             font-size: 13px;
         }
 
+        /* ================= DESCRIPTION ================= */
+
         .app-description {
             color: #9999a3;
+
             line-height: 1.6;
+
             margin: 18px 0;
+
             font-size: 14px;
+
+            min-height: 45px;
         }
+
+        /* ================= DOWNLOAD ================= */
 
         .download-button {
             display: block;
+
             width: 100%;
+
             text-align: center;
-            padding: 13px;
-            border-radius: 11px;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
             background: #7c5cff;
+
             color: white;
+
             font-weight: 700;
+
             transition: 0.2s;
         }
 
         .download-button:hover {
             background: #6949ee;
+
+            transform: translateY(-1px);
         }
 
-        /* EMPTY */
+        /* ================= LOADING ================= */
+
+        .loading {
+            text-align: center;
+
+            padding: 50px 10px;
+
+            color: #777780;
+        }
+
+        .loader {
+            width: 32px;
+            height: 32px;
+
+            margin: 0 auto 15px;
+
+            border: 3px solid #292932;
+
+            border-top-color: #7c5cff;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ================= NO RESULTS ================= */
 
         .no-results {
             display: none;
+
             text-align: center;
-            padding: 50px 10px;
+
+            padding: 60px 10px;
+
             color: #777780;
         }
 
-        /* FOOTER */
+        .no-results-icon {
+            font-size: 40px;
+
+            margin-bottom: 10px;
+        }
+
+        .no-results h3 {
+            color: #aaaab2;
+
+            margin-bottom: 7px;
+        }
+
+        /* ================= ERROR ================= */
+
+        .error-message {
+            display: none;
+
+            text-align: center;
+
+            padding: 30px 15px;
+
+            color: #ff8585;
+        }
+
+        /* ================= FOOTER ================= */
 
         footer {
-            margin-top: 80px;
+            margin-top: 70px;
+
             border-top: 1px solid #24242d;
-            padding: 35px 20px;
+
+            padding: 40px 20px;
+
             text-align: center;
+
             color: #777780;
+
             font-size: 13px;
         }
 
         footer strong {
             color: white;
+
+            font-size: 16px;
         }
 
-        /* MOBILE */
+        footer .copyright {
+            margin-top: 20px;
+        }
+
+        footer .notice {
+            max-width: 600px;
+
+            margin: 22px auto 0;
+
+            line-height: 1.6;
+        }
+
+        /* ================= MOBILE ================= */
 
         @media (max-width: 600px) {
 
@@ -277,24 +514,53 @@
                 padding: 15px;
             }
 
+            .logo {
+                font-size: 21px;
+            }
+
+            .nav-button {
+                padding: 9px 13px;
+            }
+
             .hero {
-                padding: 55px 18px 35px;
+                padding: 35px 16px 25px;
             }
 
             .hero h1 {
-                font-size: 44px;
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .search-box {
+                margin-top: 22px;
             }
 
             main {
-                padding: 15px;
+                padding: 5px 15px 30px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
             }
 
             .app-grid {
                 grid-template-columns: 1fr;
             }
 
-            .nav-button {
-                padding: 8px 11px;
+            .app-card {
+                padding: 18px;
+            }
+
+            .app-icon {
+                width: 64px;
+                height: 64px;
+            }
+
+            footer {
+                margin-top: 45px;
             }
         }
     </style>
@@ -302,7 +568,10 @@
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
+
     <div class="navbar">
 
         <a href="#" class="logo">
@@ -314,8 +583,11 @@
         </a>
 
     </div>
+
 </header>
 
+
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -329,86 +601,288 @@
 
     <p>
         Discover Android applications in one simple place.
-        Search the collection and download available apps.
+        Search, explore and download available apps.
     </p>
 
     <div class="search-box">
+
         <input
-            type="text"
+            type="search"
             id="searchInput"
             placeholder="Search apps..."
             autocomplete="off"
         >
+
     </div>
 
 </section>
 
 
+<!-- ================= MAIN ================= -->
+
 <main id="apps">
 
     <div class="section-title">
-        <h2>Apps</h2>
-        <p id="appCount">1 app</p>
+
+        <h2>
+            Apps
+        </h2>
+
+        <p id="appCount">
+            Loading...
+        </p>
+
     </div>
 
 
+    <!-- CATEGORIES -->
+
     <div class="categories">
 
-        <button class="category active" data-category="all">
+        <button
+            class="category active"
+            data-category="all"
+        >
             All
         </button>
 
-        <button class="category" data-category="tools">
+        <button
+            class="category"
+            data-category="tools"
+        >
             Tools
         </button>
 
-        <button class="category" data-category="video">
+        <button
+            class="category"
+            data-category="video"
+        >
             Video
         </button>
 
-        <button class="category" data-category="other">
+        <button
+            class="category"
+            data-category="other"
+        >
             Other
         </button>
 
     </div>
 
 
-    <br>
+    <!-- LOADING -->
+
+    <div
+        class="loading"
+        id="loading"
+    >
+
+        <div class="loader"></div>
+
+        Loading apps...
+
+    </div>
 
 
-    <div class="app-grid" id="appGrid">
+    <!-- ERROR -->
+
+    <div
+        class="error-message"
+        id="errorMessage"
+    >
+
+        Unable to load apps.
+
+        <br><br>
+
+        Check that <b>apps.json</b> exists in the same folder as
+        <b>index.html</b>.
+
+    </div>
 
 
-        <!-- NETMIRROR -->
+    <!-- APP GRID -->
 
-        <article
-            class="app-card"
-            data-name="netmirror"
-            data-category="tools"
-        >
+    <div
+        class="app-grid"
+        id="appGrid"
+    ></div>
+
+
+    <!-- NO RESULTS -->
+
+    <div
+        class="no-results"
+        id="noResults"
+    >
+
+        <div class="no-results-icon">
+            🔍
+        </div>
+
+        <h3>
+            No apps found
+        </h3>
+
+        <p>
+            Try another search or category.
+        </p>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <strong>
+        RHK PROVIDER
+    </strong>
+
+    <div class="copyright">
+        © 2026 RHK PROVIDER. All rights reserved.
+    </div>
+
+    <div class="notice">
+        Only apps that you are authorized to distribute should be
+        uploaded to this website.
+    </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const appGrid =
+        document.getElementById("appGrid");
+
+    const appCount =
+        document.getElementById("appCount");
+
+    const noResults =
+        document.getElementById("noResults");
+
+    const loading =
+        document.getElementById("loading");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const categories =
+        document.querySelectorAll(".category");
+
+
+    let apps = [];
+
+    let selectedCategory = "all";
+
+
+    /* ================= LOAD APPS ================= */
+
+    async function loadApps() {
+
+        try {
+
+            const response =
+                await fetch("apps.json?cache=" + Date.now());
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "apps.json could not be loaded"
+                );
+
+            }
+
+
+            apps = await response.json();
+
+
+            if (!Array.isArray(apps)) {
+
+                throw new Error(
+                    "apps.json must contain an array"
+                );
+
+            }
+
+
+            loading.style.display = "none";
+
+            renderApps();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            loading.style.display = "none";
+
+            errorMessage.style.display = "block";
+
+            appCount.textContent = "0 apps";
+
+        }
+
+    }
+
+
+    /* ================= CREATE APP CARD ================= */
+
+    function createAppCard(app) {
+
+        const card =
+            document.createElement("article");
+
+        card.className = "app-card";
+
+
+        const icon =
+            app.image && app.image.trim() !== ""
+
+                ? `
+                    <img
+                        src="${escapeHTML(app.image)}"
+                        alt="${escapeHTML(app.name)} icon"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;default-icon&quot;>▶</div>';"
+                    >
+                  `
+
+                : `
+                    <div class="default-icon">
+                        ▶
+                    </div>
+                  `;
+
+
+        card.innerHTML = `
 
             <div class="app-top">
 
-                <div
-                    class="app-icon"
-                    style="
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    font-size:27px;
-                    "
-                >
-                    ▶
+                <div class="app-icon">
+                    ${icon}
                 </div>
 
                 <div>
 
                     <div class="app-name">
-                        NetMirror
+                        ${escapeHTML(app.name)}
                     </div>
 
                     <div class="app-version">
-                        Version 1.0 • Android
+                        Version ${escapeHTML(app.version)}
+                        •
+                        ${escapeHTML(app.platform || "Android")}
                     </div>
 
                 </div>
@@ -417,144 +891,160 @@
 
 
             <p class="app-description">
-                NetMirror Android application.
-                Download the APK from the RHK PROVIDER release.
+                ${escapeHTML(app.description)}
             </p>
 
 
             <a
                 class="download-button"
-                href="https://github.com/instagrammeta9292-bot/RHK140907/releases/download/V1.0/NetMirror.apk"
+                href="${escapeHTML(app.download)}"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
             >
                 Download APK
             </a>
 
-        </article>
+        `;
 
 
-    </div>
-
-
-    <div class="no-results" id="noResults">
-        No apps found.
-    </div>
-
-</main>
-
-
-<footer>
-
-    <strong>RHK PROVIDER</strong>
-
-    <br><br>
-
-    © 2026 RHK PROVIDER. All rights reserved.
-
-    <br><br>
-
-    Only apps that you are authorized to distribute should be
-    uploaded to this website.
-
-</footer>
-
-
-<script>
-
-    const searchInput =
-        document.getElementById("searchInput");
-
-    const appCards =
-        document.querySelectorAll(".app-card");
-
-    const categories =
-        document.querySelectorAll(".category");
-
-    const noResults =
-        document.getElementById("noResults");
-
-    const appCount =
-        document.getElementById("appCount");
-
-
-    let selectedCategory = "all";
-
-
-    function filterApps() {
-
-        const search =
-            searchInput.value.toLowerCase().trim();
-
-        let visible = 0;
-
-
-        appCards.forEach(card => {
-
-            const name =
-                card.dataset.name.toLowerCase();
-
-            const category =
-                card.dataset.category.toLowerCase();
-
-
-            const matchesSearch =
-                name.includes(search);
-
-            const matchesCategory =
-                selectedCategory === "all" ||
-                category === selectedCategory;
-
-
-            if (matchesSearch && matchesCategory) {
-
-                card.style.display = "block";
-                visible++;
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-
-        noResults.style.display =
-            visible === 0 ? "block" : "none";
-
-
-        appCount.textContent =
-            visible + (visible === 1 ? " app" : " apps");
+        return card;
 
     }
 
 
+    /* ================= RENDER ================= */
+
+    function renderApps() {
+
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+        appGrid.innerHTML = "";
+
+
+        const filteredApps =
+            apps.filter(app => {
+
+                const name =
+                    String(app.name || "")
+                        .toLowerCase();
+
+                const description =
+                    String(app.description || "")
+                        .toLowerCase();
+
+                const category =
+                    String(app.category || "other")
+                        .toLowerCase();
+
+
+                const matchesSearch =
+                    name.includes(search) ||
+                    description.includes(search);
+
+
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+
+                return (
+                    matchesSearch &&
+                    matchesCategory
+                );
+
+            });
+
+
+        filteredApps.forEach(app => {
+
+            appGrid.appendChild(
+                createAppCard(app)
+            );
+
+        });
+
+
+        const count =
+            filteredApps.length;
+
+
+        appCount.textContent =
+            count +
+            (count === 1 ? " app" : " apps");
+
+
+        noResults.style.display =
+            count === 0
+                ? "block"
+                : "none";
+
+    }
+
+
+    /* ================= SEARCH ================= */
+
     searchInput.addEventListener(
         "input",
-        filterApps
+        renderApps
     );
 
 
+    /* ================= CATEGORY ================= */
+
     categories.forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-            categories.forEach(item => {
-                item.classList.remove("active");
-            });
+                categories.forEach(item => {
 
-            button.classList.add("active");
+                    item.classList.remove(
+                        "active"
+                    );
 
-            selectedCategory =
-                button.dataset.category;
+                });
 
-            filterApps();
 
-        });
+                button.classList.add(
+                    "active"
+                );
+
+
+                selectedCategory =
+                    button.dataset.category;
+
+
+                renderApps();
+
+            }
+        );
 
     });
 
 
-    filterApps();
+    /* ================= SECURITY ================= */
+
+    function escapeHTML(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* ================= START ================= */
+
+    loadApps();
 
 </script>
 
