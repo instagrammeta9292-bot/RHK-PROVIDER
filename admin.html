@@ -1,483 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RHK PROVIDER - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-<meta charset="UTF-8">
+        body {
+            background: #0b0b0f;
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #15151b;
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid #292932;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
 
-<title>RHK PROVIDER - Admin</title>
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-<style>
+        .header h1 {
+            font-size: 26px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
+        .header h1 span {
+            color: #7c5cff;
+        }
 
-body{
-    min-height:100vh;
-    background:#0b0b0f;
-    color:#fff;
-    padding:20px;
-}
+        .header p {
+            color: #888892;
+            font-size: 14px;
+        }
 
-.container{
-    max-width:650px;
-    margin:40px auto;
-}
+        .token-box {
+            background: #191922;
+            border: 1px solid #30264b;
+            padding: 16px;
+            border-radius: 14px;
+            margin-bottom: 24px;
+        }
 
-.logo{
-    text-align:center;
-    font-size:30px;
-    font-weight:800;
-    margin-bottom:10px;
-}
+        .token-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-.logo span{
-    color:#7c5cff;
-}
+        .token-title label {
+            font-weight: bold;
+            color: #a996ff;
+            font-size: 13px;
+        }
 
-.subtitle{
-    text-align:center;
-    color:#888892;
-    margin-bottom:30px;
-}
+        .token-title a {
+            color: #7c5cff;
+            font-size: 12px;
+            text-decoration: underline;
+        }
 
-.card{
-    background:#15151b;
-    border:1px solid #292932;
-    border-radius:20px;
-    padding:25px;
-}
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-label{
-    display:block;
-    margin:18px 0 8px;
-    color:#ddd;
-    font-size:14px;
-    font-weight:600;
-}
+        .form-group {
+            margin-bottom: 16px;
+        }
 
-input,
-select,
-textarea{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:1px solid #30303a;
-    background:#0f0f14;
-    color:#fff;
-    outline:none;
-    font-size:15px;
-}
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #aaa;
+            font-weight: 600;
+        }
 
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#7c5cff;
-}
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            background: #0b0b0f;
+            border: 1px solid #30303a;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
 
-textarea{
-    min-height:110px;
-    resize:vertical;
-}
+        input:focus, select:focus, textarea:focus {
+            border-color: #7c5cff;
+        }
 
-button{
-    width:100%;
-    border:0;
-    padding:15px;
-    border-radius:12px;
-    background:#7c5cff;
-    color:#fff;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    margin-top:25px;
-}
+        .help-text {
+            font-size: 11px;
+            color: #666673;
+            margin-top: 4px;
+        }
 
-button:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
+        button {
+            width: 100%;
+            padding: 16px;
+            background: #7c5cff;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
 
-.status{
-    display:none;
-    margin-top:20px;
-    padding:15px;
-    border-radius:12px;
-    line-height:1.5;
-    text-align:center;
-}
+        button:hover {
+            background: #6848e6;
+        }
 
-.status.success{
-    display:block;
-    background:#13251a;
-    border:1px solid #285a35;
-    color:#8ff0a5;
-}
+        button:disabled {
+            background: #3c355c;
+            cursor: not-allowed;
+        }
 
-.status.error{
-    display:block;
-    background:#281416;
-    border:1px solid #633136;
-    color:#ff9292;
-}
+        #status {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+            line-height: 1.5;
+        }
 
-.note{
-    margin-top:20px;
-    color:#777780;
-    font-size:13px;
-    line-height:1.6;
-    text-align:center;
-}
+        .status-success {
+            display: block !important;
+            background: rgba(85, 239, 196, 0.1);
+            border: 1px solid #55efc4;
+            color: #55efc4;
+        }
 
-.back{
-    display:block;
-    text-align:center;
-    margin-top:20px;
-    color:#a996ff;
-}
+        .status-error {
+            display: block !important;
+            background: rgba(255, 118, 117, 0.1);
+            border: 1px solid #ff7675;
+            color: #ff7675;
+        }
 
-</style>
+        .status-info {
+            display: block !important;
+            background: rgba(124, 92, 255, 0.1);
+            border: 1px solid #7c5cff;
+            color: #a996ff;
+        }
 
+        @media (max-width: 600px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
+    <div class="header">
+        <h1>RHK <span>ADMIN</span></h1>
+        <p>Direct Repository Manager for <code>apps.json</code></p>
+    </div>
 
-<div class="logo">
-RHK <span>PROVIDER</span>
-</div>
+    <!-- GitHub Authentication Settings -->
+    <div class="token-box">
+        <div class="token-title">
+            <label for="ghToken">GITHUB PERSONAL ACCESS TOKEN</label>
+            <a href="https://github.com/settings/tokens/new?description=RHK-Provider-Admin&scopes=public_repo" target="_blank" rel="noopener">Generate Token Directly</a>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+            <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" required>
+            <p class="help-text">Token is saved locally in your browser for convenience.</p>
+        </div>
+    </div>
 
-<div class="subtitle">
-Admin Panel
-</div>
+    <!-- Repository Configurations -->
+    <div class="grid-2">
+        <div class="form-group">
+            <label for="repoOwner">GitHub Username / Org</label>
+            <input type="text" id="repoOwner" value="instagrammeta9292-bot" required>
+        </div>
+        <div class="form-group">
+            <label for="repoName">Repository Name</label>
+            <input type="text" id="repoName" value="RHK-PROVIDER" required>
+        </div>
+    </div>
 
-<div class="card">
+    <hr style="border: 0.5px solid #24242d; margin: 15px 0 20px;">
 
-<form id="appForm">
+    <!-- App Data Fields -->
+    <div class="form-group">
+        <label for="appName">App Name</label>
+        <input type="text" id="appName" placeholder="e.g. CapCut Pro (Without VPN)" required>
+    </div>
 
-<label>
-Admin Key
-</label>
+    <div class="grid-2">
+        <div class="form-group">
+            <label for="appVersion">Version</label>
+            <input type="text" id="appVersion" value="1.0" required>
+        </div>
+        <div class="form-group">
+            <label for="appCategory">Category</label>
+            <select id="appCategory">
+                <option value="tools">Tools</option>
+                <option value="video">Video</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+    </div>
 
-<input
-    type="password"
-    id="adminKey"
-    placeholder="Enter admin key"
-    autocomplete="off"
-    required
->
+    <div class="grid-2">
+        <div class="form-group">
+            <label for="appImage">Image Filename</label>
+            <input type="text" id="appImage" placeholder="e.g. capcut.png" required>
+            <p class="help-text">Upload matching image to repository manually.</p>
+        </div>
+        <div class="form-group">
+            <label for="appPlatform">Platform</label>
+            <input type="text" id="appPlatform" value="Android" required>
+        </div>
+    </div>
 
-<label>
-App Name
-</label>
+    <div class="form-group">
+        <label for="appDownload">Release Download APK URL</label>
+        <input type="url" id="appDownload" placeholder="https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/..." required>
+    </div>
 
-<input
-    type="text"
-    id="name"
-    placeholder="Example: My App"
-    required
->
+    <div class="form-group">
+        <label for="appDescription">Description</label>
+        <textarea id="appDescription" rows="3" placeholder="Enter brief app description..."></textarea>
+    </div>
 
-<label>
-Version
-</label>
+    <button id="submitBtn" onclick="publishApp()">Commit App to apps.json</button>
 
-<input
-    type="text"
-    id="version"
-    placeholder="Example: 1.0"
-    required
->
-
-<label>
-Platform
-</label>
-
-<input
-    type="text"
-    id="platform"
-    value="Android"
->
-
-<label>
-Category
-</label>
-
-<select id="category">
-
-<option value="tools">
-Tools
-</option>
-
-<option value="video">
-Video
-</option>
-
-<option value="other">
-Other
-</option>
-
-</select>
-
-<label>
-Description
-</label>
-
-<textarea
-    id="description"
-    placeholder="Describe the application..."
-></textarea>
-
-<label>
-Image File Name
-</label>
-
-<input
-    type="text"
-    id="image"
-    placeholder="Example: myapp.png"
->
-
-<label>
-Download APK URL
-</label>
-
-<input
-    type="url"
-    id="download"
-    placeholder="https://github.com/..."
-    required
->
-
-<button
-    type="submit"
-    id="submitButton"
->
-Add App
-</button>
-
-<div
-    class="status"
-    id="status"
-></div>
-
-</form>
-
-</div>
-
-<div class="note">
-
-The app will be added to
-<strong>apps.json</strong>
-through the Cloudflare API.
-
-<br>
-
-Do not share your Admin Key.
-
-</div>
-
-<a
-    class="back"
-    href="./"
->
-← Back to RHK PROVIDER
-</a>
-
+    <div id="status"></div>
 </div>
 
 <script>
+    // Load saved settings from LocalStorage
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedToken = localStorage.getItem("rhk_gh_token");
+        const savedOwner = localStorage.getItem("rhk_gh_owner");
+        const savedRepo = localStorage.getItem("rhk_gh_repo");
 
-/*
-========================================
-YOUR CLOUDFLARE API WORKER URL
-========================================
-*/
+        if (savedToken) document.getElementById("ghToken").value = savedToken;
+        if (savedOwner) document.getElementById("repoOwner").value = savedOwner;
+        if (savedRepo) document.getElementById("repoName").value = savedRepo;
+    });
 
-const API_URL =
-"https://young-pond-e02e.rhk4133.workers.dev";
+    // Helper functions for status alerts
+    function setStatus(message, type) {
+        const status = document.getElementById("status");
+        status.className = `status-${type}`;
+        status.innerHTML = message;
+    }
 
+    // Main commit pipeline
+    async function publishApp() {
+        const token = document.getElementById("ghToken").value.trim();
+        const owner = document.getElementById("repoOwner").value.trim();
+        const repo = document.getElementById("repoName").value.trim();
+        const submitBtn = document.getElementById("submitBtn");
 
-/*
-========================================
-ELEMENTS
-========================================
-*/
-
-const form =
-document.getElementById("appForm");
-
-const adminKey =
-document.getElementById("adminKey");
-
-const nameInput =
-document.getElementById("name");
-
-const versionInput =
-document.getElementById("version");
-
-const platformInput =
-document.getElementById("platform");
-
-const categoryInput =
-document.getElementById("category");
-
-const descriptionInput =
-document.getElementById("description");
-
-const imageInput =
-document.getElementById("image");
-
-const downloadInput =
-document.getElementById("download");
-
-const submitButton =
-document.getElementById("submitButton");
-
-const statusBox =
-document.getElementById("status");
-
-
-/*
-========================================
-SUBMIT
-========================================
-*/
-
-form.addEventListener(
-"submit",
-async function(event){
-
-    event.preventDefault();
-
-    statusBox.className =
-        "status";
-
-    statusBox.textContent =
-        "";
-
-    submitButton.disabled =
-        true;
-
-    submitButton.textContent =
-        "Adding app...";
-
-
-    const data = {
-
-        name:
-            nameInput.value.trim(),
-
-        version:
-            versionInput.value.trim(),
-
-        platform:
-            platformInput.value.trim() ||
-            "Android",
-
-        category:
-            categoryInput.value,
-
-        description:
-            descriptionInput.value.trim(),
-
-        image:
-            imageInput.value.trim(),
-
-        download:
-            downloadInput.value.trim()
-
-    };
-
-
-    try{
-
-        const response =
-        await fetch(
-            API_URL,
-            {
-                method:"POST",
-
-                headers:{
-                    "Content-Type":
-                        "application/json",
-
-                    "X-Admin-Key":
-                        adminKey.value
-                },
-
-                body:
-                    JSON.stringify(data)
-            }
-        );
-
-
-        const result =
-        await response.json();
-
-
-        if(!response.ok){
-
-            throw new Error(
-                result.error ||
-                "Failed to add app."
-            );
-
+        if (!token || !owner || !repo) {
+            setStatus("Please fill in Token, Username, and Repository details.", "error");
+            return;
         }
 
+        // Cache parameters to localStorage
+        localStorage.setItem("rhk_gh_token", token);
+        localStorage.setItem("rhk_gh_owner", owner);
+        localStorage.setItem("rhk_gh_repo", repo);
 
-        statusBox.className =
-            "status success";
+        const appData = {
+            name: document.getElementById("appName").value.trim(),
+            version: document.getElementById("appVersion").value.trim(),
+            platform: document.getElementById("appPlatform").value.trim() || "Android",
+            category: document.getElementById("appCategory").value,
+            description: document.getElementById("appDescription").value.trim(),
+            image: document.getElementById("appImage").value.trim(),
+            download: document.getElementById("appDownload").value.trim()
+        };
 
-        statusBox.textContent =
-            "✅ App added successfully!";
+        if (!appData.name || !appData.image || !appData.download) {
+            setStatus("App Name, Image Filename, and Download URL are required.", "error");
+            return;
+        }
 
+        submitBtn.disabled = true;
+        setStatus("Fetching current <b>apps.json</b> from GitHub...", "info");
 
-        nameInput.value = "";
+        const filePath = "apps.json";
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
 
-        versionInput.value = "";
+        try {
+            // 1. Fetch current file content & blob SHA
+            const fetchResponse = await fetch(apiUrl, {
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Accept": "application/vnd.github.v3+json"
+                }
+            });
 
-        descriptionInput.value = "";
+            if (!fetchResponse.ok) {
+                if(fetchResponse.status === 401) throw new Error("Invalid GitHub Token. Please check permissions.");
+                if(fetchResponse.status === 404) throw new Error("apps.json not found in repository root.");
+                throw new Error(`GitHub API Error: HTTP ${fetchResponse.status}`);
+            }
 
-        imageInput.value = "";
+            const fileBlob = await fetchResponse.json();
+            const currentSha = fileBlob.sha;
 
-        downloadInput.value = "";
+            // Decode UTF-8 Base64 content safely
+            const jsonText = decodeURIComponent(escape(atob(fileBlob.content)));
+            let currentApps = JSON.parse(jsonText);
 
+            if (!Array.isArray(currentApps)) {
+                currentApps = [];
+            }
 
+            // 2. Add new item to array
+            currentApps.push(appData);
+
+            // 3. Re-encode updated JSON to Base64
+            const updatedJsonText = JSON.stringify(currentApps, null, 2);
+            const encodedContent = btoa(unescape(encodeURIComponent(updatedJsonText)));
+
+            setStatus("Committing updated structure to GitHub...", "info");
+
+            // 4. Commit updated content back via PUT request
+            const putResponse = await fetch(apiUrl, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: `Add ${appData.name} via Admin Panel`,
+                    content: encodedContent,
+                    sha: currentSha
+                })
+            });
+
+            if (!putResponse.ok) {
+                throw new Error(`Commit failed: HTTP ${putResponse.status}`);
+            }
+
+            setStatus(`<b>${appData.name}</b> successfully added to apps.json!<br>Changes will be live on GitHub Pages in 1–2 minutes.`, "success");
+
+            // Reset App input fields
+            document.getElementById("appName").value = "";
+            document.getElementById("appImage").value = "";
+            document.getElementById("appDownload").value = "";
+            document.getElementById("appDescription").value = "";
+
+        } catch (error) {
+            console.error(error);
+            setStatus(`<b>Error:</b> ${error.message}`, "error");
+        } finally {
+            submitBtn.disabled = false;
+        }
     }
-    catch(error){
-
-        statusBox.className =
-            "status error";
-
-        statusBox.textContent =
-            "❌ " +
-            (
-                error.message ||
-                "Something went wrong."
-            );
-
-    }
-
-
-    submitButton.disabled =
-        false;
-
-    submitButton.textContent =
-        "Add App";
-
-});
-
 </script>
-
 </body>
 </html>
