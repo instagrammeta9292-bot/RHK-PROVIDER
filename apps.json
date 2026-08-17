@@ -1,45 +1,29 @@
 [
   {
-    "name": "Netmirror [All premium movie available]",
+    "name": "NetMirror (watch all premium movies)",
     "version": "1.0",
     "platform": "Android",
     "category": "video",
-    "description": "Android application available for authorized distribution.",
-    "image": "example.png",
-    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V1.0/NetMirror.apk",
-    "featured": true
+    "description": "NetMirror Android application.",
+    "image": "netmirror.png",
+    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V1.0/NetMirror.apk"
   },
-
   {
-    "name": "Example Tools App",
+    "name": "Alight Motion premium (unlocked)",
     "version": "1.0",
     "platform": "Android",
     "category": "tools",
-    "description": "Useful Android application.",
-    "image": "tools.png",
-    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V2.0/Tools.apk",
-    "featured": false
+    "description": "Video and motion graphics editor for creating animations and visual effects.",
+    "image": "alightmotion.png",
+    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V2.0/Alight.Motion.Premium.v5.0.273.1028425.-.androforever.com.apk"
   },
-
   {
-    "name": "Example Music App",
+    "name": "capcut pro (without vpn)",
     "version": "1.0",
     "platform": "Android",
-    "category": "music",
-    "description": "Music application.",
-    "image": "music.png",
-    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V3.0/Music.apk",
-    "featured": false
-  },
-
-  {
-    "name": "Authorized App",
-    "version": "3.0",
-    "platform": "Android",
-    "category": "music",
-    "description": "Replace this entry with an APK you are authorized to distribute.",
-    "image": "spotify.png",
-    "download": "YOUR_AUTHORIZED_APK_RELEASE_URL",
-    "featured": true
+    "category": "tools",
+    "description": "use without vpn when error occurres make (clear cache or force stop)",
+    "image": "capcut.png",
+    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V3.0/CapCut.apk"
   }
 ]
