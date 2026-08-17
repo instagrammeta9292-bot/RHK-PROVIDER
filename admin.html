@@ -3,90 +3,89 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>RHK PROVIDER - Admin</title>
 
 <style>
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
+    min-height:100vh;
     background:#0b0b0f;
     color:#fff;
-    min-height:100vh;
     padding:20px;
 }
 
 .container{
-    max-width:600px;
-    margin:auto;
+    max-width:650px;
+    margin:40px auto;
 }
 
-.header{
+.logo{
     text-align:center;
-    padding:20px 0 25px;
-}
-
-.header h1{
     font-size:30px;
+    font-weight:800;
+    margin-bottom:10px;
 }
 
-.header h1 span{
+.logo span{
     color:#7c5cff;
 }
 
-.header p{
-    color:#777780;
-    margin-top:8px;
-    font-size:14px;
+.subtitle{
+    text-align:center;
+    color:#888892;
+    margin-bottom:30px;
 }
 
 .card{
     background:#15151b;
     border:1px solid #292932;
     border-radius:20px;
-    padding:20px;
+    padding:25px;
 }
 
 label{
     display:block;
-    color:#aaa;
+    margin:18px 0 8px;
+    color:#ddd;
     font-size:14px;
-    margin:17px 0 8px;
+    font-weight:600;
 }
 
 input,
-textarea,
-select{
+select,
+textarea{
     width:100%;
     padding:14px;
-    border-radius:11px;
+    border-radius:12px;
     border:1px solid #30303a;
     background:#0f0f14;
-    color:white;
+    color:#fff;
     outline:none;
     font-size:15px;
 }
 
 input:focus,
-textarea:focus,
-select:focus{
+select:focus,
+textarea:focus{
     border-color:#7c5cff;
 }
 
 textarea{
-    min-height:100px;
+    min-height:110px;
     resize:vertical;
-}
-
-select{
-    appearance:auto;
 }
 
 button{
@@ -95,81 +94,54 @@ button{
     padding:15px;
     border-radius:12px;
     background:#7c5cff;
-    color:white;
+    color:#fff;
     font-size:16px;
-    font-weight:bold;
-    margin-top:22px;
+    font-weight:700;
     cursor:pointer;
+    margin-top:25px;
 }
 
 button:disabled{
-    opacity:.5;
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 .status{
     display:none;
-    margin-top:18px;
-    padding:14px;
-    border-radius:11px;
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
     line-height:1.5;
-    font-size:14px;
+    text-align:center;
 }
 
 .status.success{
     display:block;
-    background:#12351f;
-    color:#7dffac;
-    border:1px solid #205c35;
+    background:#13251a;
+    border:1px solid #285a35;
+    color:#8ff0a5;
 }
 
 .status.error{
     display:block;
-    background:#351515;
-    color:#ff8585;
-    border:1px solid #633030;
+    background:#281416;
+    border:1px solid #633136;
+    color:#ff9292;
 }
 
-.info{
+.note{
     margin-top:20px;
-    padding:15px;
-    border-radius:12px;
-    background:#171421;
-    border:1px solid #30264b;
-    color:#aaa;
+    color:#777780;
     font-size:13px;
     line-height:1.6;
-}
-
-.info strong{
-    color:#fff;
+    text-align:center;
 }
 
 .back{
     display:block;
     text-align:center;
     margin-top:20px;
-    color:#aaa;
-    font-size:14px;
-}
-
-.back:hover{
-    color:white;
-}
-
-@media(max-width:600px){
-
-    body{
-        padding:15px;
-    }
-
-    .card{
-        padding:17px;
-    }
-
-    .header h1{
-        font-size:27px;
-    }
-
+    color:#a996ff;
 }
 
 </style>
@@ -180,59 +152,61 @@ button:disabled{
 
 <div class="container">
 
-<div class="header">
-
-<h1>
+<div class="logo">
 RHK <span>PROVIDER</span>
-</h1>
-
-<p>
-Admin Panel
-</p>
-
 </div>
 
+<div class="subtitle">
+Admin Panel
+</div>
 
 <div class="card">
 
 <form id="appForm">
 
+<label>
+Admin Key
+</label>
+
+<input
+    type="password"
+    id="adminKey"
+    placeholder="Enter admin key"
+    autocomplete="off"
+    required
+>
 
 <label>
 App Name
 </label>
 
 <input
-type="text"
-id="name"
-placeholder="Example App"
-required
+    type="text"
+    id="name"
+    placeholder="Example: My App"
+    required
 >
-
 
 <label>
 Version
 </label>
 
 <input
-type="text"
-id="version"
-placeholder="1.0"
-required
+    type="text"
+    id="version"
+    placeholder="Example: 1.0"
+    required
 >
-
 
 <label>
 Platform
 </label>
 
 <input
-type="text"
-id="platform"
-value="Android"
-required
+    type="text"
+    id="platform"
+    value="Android"
 >
-
 
 <label>
 Category
@@ -254,123 +228,130 @@ Other
 
 </select>
 
-
 <label>
 Description
 </label>
 
 <textarea
-id="description"
-placeholder="Write app description..."
-required
+    id="description"
+    placeholder="Describe the application..."
 ></textarea>
 
-
 <label>
-Icon filename
+Image File Name
 </label>
 
 <input
-type="text"
-id="image"
-placeholder="example.png"
+    type="text"
+    id="image"
+    placeholder="Example: myapp.png"
 >
 
-
 <label>
-APK Download URL
+Download APK URL
 </label>
 
 <input
-type="url"
-id="download"
-placeholder="https://github.com/..."
-required
+    type="url"
+    id="download"
+    placeholder="https://github.com/..."
+    required
 >
-
 
 <button
-type="submit"
-id="addButton"
+    type="submit"
+    id="submitButton"
 >
-ADD APP
+Add App
 </button>
 
+<div
+    class="status"
+    id="status"
+></div>
 
 </form>
 
-
-<div
-id="status"
-class="status"
-></div>
-
-
-<div class="info">
-
-<strong>Icon:</strong>
-Upload the PNG image to the same GitHub repository as
-<code>admin.html</code>, then enter its filename here.
-
-<br><br>
-
-Example:
-
-<code>myapp.png</code>
-
-<br><br>
-
-<strong>APK:</strong>
-Paste the authorized APK Release download URL.
-
 </div>
 
-</div>
+<div class="note">
 
+The app will be added to
+<strong>apps.json</strong>
+through the Cloudflare API.
+
+<br>
+
+Do not share your Admin Key.
+
+</div>
 
 <a
-href="index.html"
-class="back"
+    class="back"
+    href="./"
 >
 ← Back to RHK PROVIDER
 </a>
 
 </div>
 
-
 <script>
 
-
 /*
-====================================
-YOUR CLOUDFLARE WORKER URL
-====================================
-
-After we create the Worker,
-you will replace this URL.
-
-DO NOT PUT YOUR GITHUB TOKEN HERE.
+========================================
+YOUR CLOUDFLARE API WORKER URL
+========================================
 */
 
 const API_URL =
-"https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
+"https://young-pond-e02e.rhk4133.workers.dev";
 
+
+/*
+========================================
+ELEMENTS
+========================================
+*/
 
 const form =
-document.getElementById(
-"appForm"
-);
+document.getElementById("appForm");
 
-const addButton =
-document.getElementById(
-"addButton"
-);
+const adminKey =
+document.getElementById("adminKey");
+
+const nameInput =
+document.getElementById("name");
+
+const versionInput =
+document.getElementById("version");
+
+const platformInput =
+document.getElementById("platform");
+
+const categoryInput =
+document.getElementById("category");
+
+const descriptionInput =
+document.getElementById("description");
+
+const imageInput =
+document.getElementById("image");
+
+const downloadInput =
+document.getElementById("download");
+
+const submitButton =
+document.getElementById("submitButton");
 
 const statusBox =
-document.getElementById(
-"status"
-);
+document.getElementById("status");
 
+
+/*
+========================================
+SUBMIT
+========================================
+*/
 
 form.addEventListener(
 "submit",
@@ -378,57 +359,42 @@ async function(event){
 
     event.preventDefault();
 
-
-    addButton.disabled =
-    true;
-
-    addButton.textContent =
-    "ADDING APP...";
-
-
     statusBox.className =
-    "status";
+        "status";
 
-    statusBox.style.display =
-    "none";
+    statusBox.textContent =
+        "";
+
+    submitButton.disabled =
+        true;
+
+    submitButton.textContent =
+        "Adding app...";
 
 
-    const app = {
+    const data = {
 
         name:
-        document.getElementById(
-            "name"
-        ).value.trim(),
+            nameInput.value.trim(),
 
         version:
-        document.getElementById(
-            "version"
-        ).value.trim(),
+            versionInput.value.trim(),
 
         platform:
-        document.getElementById(
-            "platform"
-        ).value.trim(),
+            platformInput.value.trim() ||
+            "Android",
 
         category:
-        document.getElementById(
-            "category"
-        ).value,
+            categoryInput.value,
 
         description:
-        document.getElementById(
-            "description"
-        ).value.trim(),
+            descriptionInput.value.trim(),
 
         image:
-        document.getElementById(
-            "image"
-        ).value.trim(),
+            imageInput.value.trim(),
 
         download:
-        document.getElementById(
-            "download"
-        ).value.trim()
+            downloadInput.value.trim()
 
     };
 
@@ -443,11 +409,14 @@ async function(event){
 
                 headers:{
                     "Content-Type":
-                    "application/json"
+                        "application/json",
+
+                    "X-Admin-Key":
+                        adminKey.value
                 },
 
                 body:
-                JSON.stringify(app)
+                    JSON.stringify(data)
             }
         );
 
@@ -460,51 +429,55 @@ async function(event){
 
             throw new Error(
                 result.error ||
-                "Unable to add app."
+                "Failed to add app."
             );
 
         }
 
 
         statusBox.className =
-        "status success";
+            "status success";
 
         statusBox.textContent =
-        "✅ App added successfully!";
+            "✅ App added successfully!";
 
 
-        form.reset();
+        nameInput.value = "";
 
+        versionInput.value = "";
 
-        document.getElementById(
-            "platform"
-        ).value =
-        "Android";
+        descriptionInput.value = "";
+
+        imageInput.value = "";
+
+        downloadInput.value = "";
 
 
     }
     catch(error){
 
         statusBox.className =
-        "status error";
+            "status error";
 
         statusBox.textContent =
-        "❌ " +
-        error.message;
+            "❌ " +
+            (
+                error.message ||
+                "Something went wrong."
+            );
 
     }
 
 
-    addButton.disabled =
-    false;
+    submitButton.disabled =
+        false;
 
-    addButton.textContent =
-    "ADD APP";
+    submitButton.textContent =
+        "Add App";
 
 });
-
 
 </script>
 
 </body>
-  </html>
+</html>
