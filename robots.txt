@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://instagrammeta9292-bot.github.io/RHK-PROVIDER/sitemap.xml
+
