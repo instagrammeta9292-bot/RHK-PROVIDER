@@ -1,2 +1,11 @@
-[]
-
+[
+  {
+    "name": "NET MIRROR (ALL IN ONE MOVIE CORNER)",
+    "version": "1.0",
+    "platform": "Android",
+    "category": "tools",
+    "description": "Watch all premium movies in Netflix and Amazon prime video like all platforms",
+    "image": "netmirror.png",
+    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V1.0/NetMirror.apk"
+  }
+]
