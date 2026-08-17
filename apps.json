@@ -25,5 +25,14 @@
     "description": "use without vpn when error occurres make (clear cache or force stop)",
     "image": "capcut.png",
     "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V3.0/CapCut.apk"
+  },
+  {
+    "name": "SPOTIFY(premium unlocked)",
+    "version": "1.0",
+    "platform": "Android",
+    "category": "tools",
+    "description": "Good",
+    "image": "RHK.jpg",
+    "download": "https://github.com/instagrammeta9292-bot/RHK-PROVIDER/releases/download/V4.0/Spotify.Premium-v3.0.@EPICMODDER.apk"
   }
 ]
